@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fa">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <title>Add post</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row justify-content-center align-items-center mt-5">
+        <div class="col-sm-8">
+          <h2 class="text-center my-2">ایجاد پست</h2>
+
+            <div class="mb-3">
+              <label for="title" class="form-label">عنوان پست</label>
+              <input type="text" class="form-control" id="title" >
+            </div>
+
+            <div class="mb-3">
+              <label for="author" class="form-label">نویسنده</label>
+              <input type="text" class="form-control" id="author" >
+            </div>
+
+            <div class="mb-3">
+              <label for="body" class="form-label">متن پست</label>
+              <textarea type="text" class="form-control" id="body" rows="3"></textarea>
+            </div>
+
+            <button
+              type="submit"
+              class="btn btn-outline-primary mt-4"
+            >
+              ثبت پست
+            </button>
+          </form>
+
+          <hr class="my-5" />
+
+          <table class="table table-hover mb-5">
+            <thead>
+              <tr>
+                <th>عنوان پست</th>
+                <th>نویسنده</th>
+                <th>متن پست</th>
+                <th>حذف</th>
+              </tr>
+            </thead>
+
+            <tbody id="post-list"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <script src="./js/main.js"></script>
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  </body>
+</html>
+
+<!DOCTYPE html>
