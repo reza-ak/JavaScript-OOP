@@ -32,6 +32,19 @@ class UI {
     document.getElementById('author').value = "";
     document.getElementById('body').value = "";
   }
+
+  showAlert(message, className) {
+    const div = document.createElement("div");
+    div.className = `alert alert-${className}`;
+    div.appendChild(document.createTextNode(message));
+    const col = document.querySelector('.col-sm-8');
+    const form = document.querySelector('#post-form');
+    col.insertBefore(div, form);
+
+    setTimeout(() => {
+      document.querySelector('.alert').remove();
+    }, 3000);
+  }
 }
 
 document.getElementById('post-form').addEventListener("submit", function (e) {
@@ -41,7 +54,15 @@ document.getElementById('post-form').addEventListener("submit", function (e) {
 
   const post = new Post(title, author, body);
   const ui = new UI();
-  ui.addPostToList(post);
-  ui.clearFields();
+
+  // validation
+  if (title === '' || author === '' || body === '') {
+    ui.showAlert('تمام فیلد ها الزامی هستند.', 'danger');
+  }
+  else {
+    ui.addPostToList(post);
+    ui.showAlert('پست جدید با موفقیت ایجاد شد.', 'success');
+    ui.clearFields();
+  }
   e.preventDefault();
 })
