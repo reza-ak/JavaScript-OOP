@@ -45,6 +45,10 @@ class UI {
       document.querySelector('.alert').remove();
     }, 3000);
   }
+
+  deletePost(target) {
+    target.parentElement.parentElement.remove();
+  }
 }
 
 document.getElementById('post-form').addEventListener("submit", function (e) {
@@ -65,4 +69,12 @@ document.getElementById('post-form').addEventListener("submit", function (e) {
     ui.clearFields();
   }
   e.preventDefault();
+})
+
+document.getElementById('post-list').addEventListener("click", function (e) {
+  const ui = new UI();
+  if (e.target.classList.contains('delete')) {
+    ui.deletePost(e.target);
+    ui.showAlert('پست حذف شد.', 'success');
+  }
 })
