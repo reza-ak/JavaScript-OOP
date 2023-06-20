@@ -51,6 +51,37 @@ class UI {
   }
 }
 
+// local storage
+class Store {
+  static getPosts() {
+    let posts;
+    if(localStorage.getItem('posts') == null){
+      posts = [];
+    } else {
+      posts = JSON.parse(localStorage.getItem('posts'));
+    }
+    return posts;
+  }
+  static displayPosts() {
+    const posts = Store.getPosts();
+    posts.forEach(function(post){
+      const ui = new UI;
+      ui.addPostToList(post);
+    })
+  }
+  static addPost(post) {
+    const posts = Store.getPosts();
+    posts.push(post);
+    localStorage.setItem('posts', JSON.stringify(posts));
+  }
+  static removePost(title) {
+
+  }
+}
+
+// event زیر زمانی که کل داکیومنت لود شود اجرا میشود
+document.addEventListener("DOMContentLoaded", Store.displayPosts);
+
 document.getElementById('post-form').addEventListener("submit", function (e) {
   const title = document.getElementById('title').value;
   const author = document.getElementById('author').value;
@@ -65,6 +96,7 @@ document.getElementById('post-form').addEventListener("submit", function (e) {
   }
   else {
     ui.addPostToList(post);
+    Store.addPost(post);
     ui.showAlert('پست جدید با موفقیت ایجاد شد.', 'success');
     ui.clearFields();
   }
