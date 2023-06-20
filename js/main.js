@@ -55,7 +55,7 @@ class UI {
 class Store {
   static getPosts() {
     let posts;
-    if(localStorage.getItem('posts') == null){
+    if (localStorage.getItem('posts') == null) {
       posts = [];
     } else {
       posts = JSON.parse(localStorage.getItem('posts'));
@@ -64,7 +64,7 @@ class Store {
   }
   static displayPosts() {
     const posts = Store.getPosts();
-    posts.forEach(function(post){
+    posts.forEach(function (post) {
       const ui = new UI;
       ui.addPostToList(post);
     })
@@ -75,7 +75,13 @@ class Store {
     localStorage.setItem('posts', JSON.stringify(posts));
   }
   static removePost(title) {
-
+    const posts = Store.getPosts();
+    posts.forEach(function (post, index) {
+      if (post.title === title) {
+        posts.splice(index, 1);
+      }
+    });
+    localStorage.setItem('posts', JSON.stringify(posts));
   }
 }
 
@@ -107,6 +113,10 @@ document.getElementById('post-list').addEventListener("click", function (e) {
   const ui = new UI();
   if (e.target.classList.contains('delete')) {
     ui.deletePost(e.target);
+    const tr = e.target.parentElement.parentElement;
+    const title = tr.firstElementChild.textContent;
+    Store.removePost(title)
+
     ui.showAlert('پست حذف شد.', 'success');
   }
 })
